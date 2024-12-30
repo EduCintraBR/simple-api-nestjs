@@ -1,5 +1,5 @@
 import * as bcrypt from 'bcrypt';
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
 import { PrismaService } from "src/prisma/prisma.service";
 import { CreateUserDTO } from "./dto/create-user.dto";
 import { UpdatePartialUserDTO } from "./dto/update-partial-user.dto";
@@ -15,6 +15,12 @@ export class UserService {
     ) {}
 
     async create(data: CreateUserDTO) {
+        const userEmail = await this.findByEmail(data.email);
+
+        if(userEmail) {
+            throw new BadRequestException('User email already exists');
+        }
+
         const saltRounds = 10;
         data.password = await bcrypt.hash(data.password, saltRounds);
 
@@ -57,5 +63,9 @@ export class UserService {
         if(!await this.findOne(id)) {
             throw new NotFoundException('User not found');
         }
+    }
+
+    async findByEmail(email: string) {
+        return this._prismaService.user.findFirst({ where: { email } });
     }
 }
