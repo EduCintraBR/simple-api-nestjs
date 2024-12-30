@@ -1,8 +1,9 @@
-import { Module } from "@nestjs/common";
+import { MiddlewareConsumer, Module, NestModule } from "@nestjs/common";
 import { UserController } from "./user.controller";
 import { PrismaModule } from "src/prisma/prisma.module";
 import { UserService } from "./user.service";
 import { MapperModule } from "src/mapper/mapper.module";
+import { UserIdCheckMiddleware } from "src/middlewares/user-id-check.middleware";
 
 @Module({
     imports: [PrismaModule, MapperModule],
@@ -10,4 +11,9 @@ import { MapperModule } from "src/mapper/mapper.module";
     providers: [UserService],
     exports: []
 })
-export class UserModule { }
+export class UserModule implements NestModule { 
+    configure(consumer: MiddlewareConsumer) {
+        consumer.apply(UserIdCheckMiddleware)
+            .forRoutes('users/:id');
+    }
+}
