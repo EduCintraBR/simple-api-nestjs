@@ -4,6 +4,7 @@ import { UpdateUserDTO } from "./dto/update-user.dto";
 import { UpdatePartialUserDTO } from "./dto/update-partial-user.dto";
 import { UserService } from "./user.service";
 import { UserDto } from "./dto/user.dto";
+import { ParamId } from "src/decorators/param-id.decorator";
 
 @Controller('users')
 export class UserController {
@@ -21,22 +22,22 @@ export class UserController {
     }
 
     @Get(':id')
-    async getById(@Param('id', ParseIntPipe) id) {
+    async getById(@ParamId() id: number) {
         return await this.userService.findOne(id);
     }
 
     @Put(':id')
-    async update(@Body() data: UpdateUserDTO, @Param('id', ParseIntPipe) id) {
+    async update(@Body() data: UpdateUserDTO, @ParamId() id: number) {
         return await this.userService.update(id, data);
     }
 
     @Patch(':id')
-    async updatePartial(@Body() data: UpdatePartialUserDTO, @Param('id', ParseIntPipe) id) {
+    async updatePartial(@Body() data: UpdatePartialUserDTO, @ParamId() id: number) {
         return await this.userService.updatePartial(id, data);
     }
 
     @Delete(':id')
-    async remove(@Param('id', ParseIntPipe) id) {
+    async remove(@ParamId() id: number) {
         await this.userService.remove(id);
         return `id ${id} removed successfully`;
     }
