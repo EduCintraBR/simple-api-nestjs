@@ -21,6 +21,7 @@ export class UserController {
         return await this.userService.create(userData);
     }
 
+    @Roles(Role.USER)
     @Get()
     async getAll() {
         return await this.userService.findAll();

@@ -13,6 +13,7 @@ export class UserMappingProfile implements MappingProfile<UserModel, UserDto> {
       email: source.email,
       name: source.name,
       password: source.password,
+      role: source.role,
     };
   }
 }
