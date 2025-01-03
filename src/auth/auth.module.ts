@@ -4,6 +4,7 @@ import { AuthService } from "./auth.service";
 import { AuthController } from "./auth.controller";
 import { UserModule } from "src/user/user.module";
 import { PrismaModule } from "src/prisma/prisma.module";
+import { MailerService } from "@nestjs-modules/mailer";
 
 @Module({
     imports: [

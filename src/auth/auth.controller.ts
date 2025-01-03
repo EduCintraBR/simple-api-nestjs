@@ -23,13 +23,11 @@ export class AuthController {
         return await this.authService.register(body);
     }
 
-    @UseGuards(AuthGuard)
     @Post('forget-password')
     async forgetPassword(@Body() body: AuthForgetPasswordDTO) {
         return await this.authService.forgetPassword(body.email);
     }
 
-    @UseGuards(AuthGuard)
     @Post('reset-password')
     async resetPassword(@Body() body: AuthResetPasswordDTO) {
         return await this.authService.resetPassword(body.password, body.token);
