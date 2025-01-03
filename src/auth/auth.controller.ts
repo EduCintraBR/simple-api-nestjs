@@ -1,4 +1,4 @@
-import { Body, Controller, Headers, Post, Req, UseGuards } from "@nestjs/common";
+import { Body, Controller, Post, UseGuards } from "@nestjs/common";
 import { AuthLoginDTO } from "./dto/auth-login.dto";
 import { AuthRegisterDTO } from "./dto/auth-register.dto";
 import { AuthForgetPasswordDTO } from "./dto/auth-forget-password.dto";
@@ -40,5 +40,4 @@ export class AuthController {
     async me(@User() user) {
         return { user };
     }
-
 }
