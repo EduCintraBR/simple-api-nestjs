@@ -1,11 +1,11 @@
 import * as bcrypt from 'bcrypt';
 import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
-import { PrismaService } from "src/prisma/prisma.service";
-import { CreateUserDTO } from "./dto/create-user.dto";
-import { UpdatePartialUserDTO } from "./dto/update-partial-user.dto";
-import { UserDto } from "./dto/user.dto";
-import { MapperService } from "src/mapper/mapper.service";
-import { UserModel } from "./models/user.model";
+import { MapperService } from '../mapper/mapper.service';
+import { CreateUserDTO } from './dto/create-user.dto';
+import { UserDto } from './dto/user.dto';
+import { UserModel } from './models/user.model';
+import { UpdatePartialUserDTO } from './dto/update-partial-user.dto';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class UserService {
